@@ -1,57 +1,140 @@
 # AI Powered Travel Planner
 
-This repository contains a React frontend and a Django backend for an AI-powered travel planner.
+Professional AI-assisted travel planning platform that helps users discover destinations, generate personalized itineraries, and collaborate with friends. This repository contains a React frontend and a Django REST backend suitable for local development and production deployment.
 
-## Structure
-- `react/react/reactapp` — React frontend
-- `travel_django(final)/travel_django` — Django backend
+---
 
-## Prerequisites
-- Node.js + npm
+## Features
+
+- Secure authentication and role management
+- Collect user trip preferences and constraints
+- AI-driven destination and itinerary suggestions
+- Collaborative trip planning with invites and voting
+- Persistent trip history and exportable summaries
+- Email notifications for invites and confirmations
+
+---
+
+## Tech Stack
+
+- Frontend: React
+- Backend: Django + Django REST Framework
+- Database: SQLite (development), PostgreSQL (production)
+- Authentication: JWT / session-based as configured in backend
+- Extras: python-decouple for environment config, CORS support
+
+---
+
+## Repository Layout
+
+```
+Ai-Powered-Travel-Planner/
+├─ react/react/reactapp/                # React application (frontend)
+├─ travel_django(final)/travel_django/ # Django project (backend)
+│  └─ travel/                           # Django project package and apps
+└─ README.md                            # Project documentation
+```
+
+---
+
+## Getting Started
+
+Prerequisites
+
+- Node.js (LTS) and npm
 - Python 3.10+ and `venv`
+- Git
 
-## Backend (Django) — quick start
-1. Create a virtual environment and activate it:
+Clone the repository
+
+```bash
+git clone https://github.com/Tejasreemohan/Ai-Powered-Travel-Planner.git
+cd "Ai-Powered-Travel-Planner"
+```
+
+### Backend (Django) — local development
+
 ```powershell
 cd "travel_django(final)/travel_django"
 python -m venv .venv
-.venv\Scripts\Activate
-```
-2. Install dependencies and run migrations:
-```powershell
+# PowerShell: . .venv\Scripts\Activate
+# If activation is restricted, you can invoke the venv Python directly: .venv\Scripts\python.exe
 pip install -r requirements.txt
 python manage.py migrate
+python manage.py runserver 8000
 ```
-3. Create a `.env` file in `travel_django(final)/travel_django/travel` with the following variables (do NOT commit it):
+
+Create a `.env` file (do NOT commit) under `travel_django(final)/travel_django/travel` with the following variables:
+
 ```
-SECRET_KEY=your_secret_here
-GROQ_API_KEY=your_groq_key
+SECRET_KEY=your_secret_key
+GROQ_API_KEY=your_groq_api_key
 GOOGLE_AI_KEY=your_google_api_key
-EMAIL_HOST_USER=you@example.com
+EMAIL_HOST_USER=your_email@example.com
 EMAIL_HOST_PASSWORD=your_email_password
 ALLOWED_HOSTS=localhost,127.0.0.1
 ```
-4. Run the server:
-```powershell
-python manage.py runserver
-```
 
-## Frontend (React) — quick start
+### Frontend (React)
+
 ```powershell
 cd react/react/reactapp
 npm install
 npm start
 ```
 
-## Git & Deployment notes
-- A root `.gitignore` was added to ignore `.env`, venvs, `node_modules`, and OS files.
-- The frontend was embedded into the root repository (no submodule) so the repo contains both projects.
-- Secrets previously present in commits should be rotated now — revoke/regenerate any exposed API keys and passwords.
+By default the frontend expects the backend at `http://127.0.0.1:8000`. Set `REACT_APP_API_URL` in the React `.env` files if you run the API elsewhere.
 
-To remove secrets from git history, consider using the BFG Repo-Cleaner or `git filter-repo`, then force-push the cleaned history and inform collaborators.
+---
 
-## Contact / Next steps
-- If you want, I can:
-  - Start both servers here to verify functionality, or
-  - Remove secrets from git history now (history rewrite), or
-  - Create CI/CD or deployment files.
+## API Overview
+
+- `POST /api/auth/register` — Register user
+- `POST /api/auth/login` — Obtain auth token
+- `GET /api/trips` — List trips for authenticated user
+- `POST /api/trips` — Create a trip
+- `POST /api/suggestions` — Request AI-generated suggestions
+
+See the `planner` Django app for full endpoint documentation.
+
+---
+
+## Security & Maintenance
+
+- Do not commit secrets. Use environment variables or a secret manager.
+- Rotate any API keys or credentials that were previously committed.
+- To purge secrets from git history, use `git filter-repo` or the BFG Repo-Cleaner and force-push the cleaned history.
+
+---
+
+## Roadmap & Enhancements
+
+- Dockerize frontend and backend for consistent development and deployments
+- Add automated tests and CI (GitHub Actions)
+- Deploy to a cloud provider and add monitoring
+- Improve and benchmark AI suggestion models
+
+---
+
+## Contributing
+
+Contributions are welcome. To contribute:
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feat/your-feature`
+3. Commit changes and push your branch
+4. Open a pull request describing the change
+
+Please include tests for new behavior and keep changes focused.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+## Author
+
+**Matta Teja Sree** — https://github.com/Tejasreemohan
