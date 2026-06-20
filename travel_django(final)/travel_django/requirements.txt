@@ -1,0 +1,6 @@
+Django
+djangorestframework
+python-decouple
+django-cors-headers
+djangorestframework-simplejwt
+python-dotenv

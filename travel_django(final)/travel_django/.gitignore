@@ -1,0 +1,12 @@
+# Django-specific ignores
+__pycache__/
+*.pyc
+*.sqlite3
+.venv/
+env/
+venv/
+.env
+*.log
+staticfiles/
+.vscode/
+.DS_Store
